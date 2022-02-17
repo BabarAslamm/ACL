@@ -3,6 +3,7 @@
 namespace Insyghts\Authentication;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Gate;
 
 
 class AuthenticationServiceProvider extends ServiceProvider
@@ -35,7 +36,7 @@ class AuthenticationServiceProvider extends ServiceProvider
     {
         include __DIR__.'/routes.php';
         $this->loadMigrationsFrom(__DIR__ . '/Migrations');
-        // $this->loadSeedersFrom(__DIR__.'/Seeders');
+
 
 
 

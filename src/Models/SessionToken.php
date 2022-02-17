@@ -36,10 +36,11 @@ class SessionToken extends Model
 
 
 
-    public function getTokenId($user_id)
+
+    public function getSessionToken($user_id)
     {
-        $token_id = SessionToken::where('user_id', '=', $user_id)->first();
-        return $token_id;
+        $token = SessionToken::where('user_id', '=', $user_id)->first();
+        return $token;
     }
 
 
