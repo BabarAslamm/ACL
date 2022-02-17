@@ -5,12 +5,13 @@ namespace Insyghts\Authentication\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Insyghts\Authentication\Models\SessionToken;
 use Illuminate\Auth\Authenticatable as AuthenticableTrait;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Hash;
 
 
 use Insyghts\Common\Models\BaseModel;
 
-class User extends BaseModel
+class User extends Model
 {
 
     use HasFactory, AuthenticableTrait;

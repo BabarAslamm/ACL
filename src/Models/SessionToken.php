@@ -3,10 +3,11 @@
 namespace Insyghts\Authentication\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 use Insyghts\Authentication\Models\User;
 use Insyghts\Common\Models\BaseModel;
 
-class SessionToken extends BaseModel
+class SessionToken extends Model
 {
     use HasFactory;
 
