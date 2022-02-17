@@ -21,6 +21,7 @@ class myAuth
     public function handle(Request $request, Closure $next )
     {
 
+
         if (isset($_SERVER['HTTP_TOKEN'])) {
 
             $Token = $_SERVER['HTTP_TOKEN'];

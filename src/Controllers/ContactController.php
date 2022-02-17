@@ -5,6 +5,7 @@ namespace Insyghts\Authentication\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use Insyghts\Authentication\Middleware\myAuth;
+use Insyghts\Authentication\Middleware\CheckPermission;
 use Insyghts\Authentication\Models\Contact;
 use Insyghts\Authentication\Services\ContactService;
 use Insyghts\Common\Controllers\CommonController;
@@ -13,6 +14,7 @@ class ContactController extends CommonController
 {
     public function __construct(ContactService $ContactService)
     {
+
         $this->middleware(myAuth::class);
         $this->contactService = $ContactService;
     }

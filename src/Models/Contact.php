@@ -62,6 +62,12 @@ class Contact extends Model
         $Contact->created_at = $current_timestamp;
         $Contact->updated_at = $current_timestamp;
 
+        $user_id= app('loginUser')->getUser()->id;
+
+        $Contact->created_by = $user_id;
+        $Contact->last_modified_by = $user_id;
+        $Contact->deleted_by = NULL;
+
         $Contact->save();
 
         $response['data'] = $Contact;
@@ -85,6 +91,11 @@ class Contact extends Model
             $current_timestamp    = gmdate('Y-m-d G:i:s');
             $Contact->created_at  = $current_timestamp;
             $Contact->updated_at  = $current_timestamp;
+
+            $user_id= app('loginUser')->getUser()->id;
+
+            $Contact->last_modified_by = $user_id;
+            $Contact->deleted_by = NULL;
 
             $Contact->update();
 
@@ -114,6 +125,10 @@ class Contact extends Model
 
         $Contact = Contact::where('id',$id)->first();
         if($Contact){
+
+            $user_id= app('loginUser')->getUser()->id;
+            $Contact->deleted_by = $user_id;
+
             $Contact->delete();
             $Contact->save();
             $response['data'] = 'Contact deleted successfull';

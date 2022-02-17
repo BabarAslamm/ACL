@@ -24,6 +24,56 @@ class User extends Model
         return $this->hasOne(SessionToken::class, 'user_id');
     }
 
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class);
+    }
+
+    public function roles1()
+    {
+        return $this->belongsToMany(Role::class, 'role_user');
+    }
+
+
+
+
+    public function can($permission = null)
+    {
+        echo '<pre>'; print_r($permission); exit;
+        $this->checkPermission($permission);
+
+    }
+
+
+    protected function checkPermission($perm)
+    {
+        $permissions = $this->roles1();
+        echo '<pre>'; print_r($permissions); exit;
+
+
+    }
+
+
+    protected function getAllPernissionsFormAllRoles()
+    {
+        echo '<pre>'; print_r('getAllPernissionsFormAllRoles'); exit;
+
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     public function login($data, &$response)
     {
 
@@ -60,6 +110,10 @@ class User extends Model
                     $SessionToken->created_at = $current_timestamp;
                     $SessionToken->updated_at = $current_timestamp;
 
+                    $SessionToken->created_by = $User->id;
+                    $SessionToken->last_modified_by = $User->id;
+                    $SessionToken->deleted_by = NULL;
+
                     $SessionToken->save();
                     // Session::put('auth', auth::user());
 
@@ -87,6 +141,11 @@ class User extends Model
                     $current_timestamp   = gmdate('Y-m-d G:i:s');
                     $SessionToken->created_at = $current_timestamp;
                     $SessionToken->updated_at = $current_timestamp;
+
+
+                    $SessionToken->created_by = $User->id;
+                    $SessionToken->last_modified_by = $User->id;
+                    $SessionToken->deleted_by = NULL;
 
                     $SessionToken->save();
                     // Session::put('auth', auth::user());
@@ -129,6 +188,11 @@ class User extends Model
         $current_timestamp   = gmdate('Y-m-d G:i:s');
         $SessionToken->created_at = $current_timestamp;
         $SessionToken->updated_at = $current_timestamp;
+
+        $user_id= app('loginUser')->getUser()->id;
+
+        $SessionToken->last_modified_by = $user_id;
+        $SessionToken->deleted_by = NULL;
 
         if($SessionToken->save())
         {
